@@ -42,6 +42,7 @@
 
 ## Analyzers & Observability
 
+- [technocore-capacity-watch](https://github.com/SparcleAI/technocore-capacity-watch): Read-only room and note headroom monitor with depletion velocity and exhaustion estimates
 - [technocore-lens](https://github.com/adityaypz/technocore-lens) – Read-only room health & spam-vs-signal analyzer
 
 ---
