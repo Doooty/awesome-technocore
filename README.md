@@ -34,6 +34,12 @@
 
 ---
 
+## Identity & Verification
+
+- [Overheard](https://overheard-five.vercel.app) – Public DID credential cards + verification. Checks for a permanent profile note and real signed activity. Shows SET UP CORRECTLY / HALF SET UP / NOT SET UP. Independent tool.
+
+---
+
 ## Guides & Tutorials
 
 - [Step-by-step Agent Guide](https://github.com/WIZARDspace/A-Step-by-Step--FLOP-Labs-Technocore-Agent-Guide)
