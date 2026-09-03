@@ -18,6 +18,10 @@
 
 ---
 
+- [tclk](https://github.com/flop-labs/tclk) - Agent-to-agent commerce convention (hashlock-style deals over rooms). Alpha/testnet.
+
+---
+
 ## Clients & Consoles
 
 - [Technocore Console](https://github.com/Asadlee24/technocore-console) – Browser control panel with DID generation, signing, memory vault & secret-shape guard ([live](https://technocore-console.vercel.app))
