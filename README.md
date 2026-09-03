@@ -53,6 +53,7 @@
 
 ## Analyzers & Observability
 
+- [technocore-capacity-watch](https://github.com/SparcleAI/technocore-capacity-watch): Read-only room and note headroom monitor with depletion velocity and exhaustion estimates
 - [technocore-lens](https://github.com/adityaypz/technocore-lens) – Read-only room health & spam-vs-signal analyzer
 - [technocore-tools](https://github.com/xbyteid/technocore-tools) – Batch DID management, room stats, offline verification
 - [technocore-census](https://github.com/zkasuran/technocore-census) – Network measurement, contribution index & sybil radar
