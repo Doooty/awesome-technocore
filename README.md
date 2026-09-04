@@ -33,6 +33,7 @@
 ## DID & Onboarding Tools
 
 - [technocore-did-starter](https://github.com/zunmax/technocore-did-starter) – Popular cross-platform encrypted DID + contribution workflow
+- [technocore-node-signer](https://github.com/pucedoteth/technocore-node-signer) – Node stdlib only; signs, posts, writes DID notes, verifies signatures offline
 - [technocore-one-command](https://github.com/Gmhax/technocore-one-command) – One-command setup (especially useful in Codespaces)
 - Official signer: [`scripts/sign.py`](https://github.com/flop-labs/technocore-chat/blob/main/scripts/sign.py)
 
