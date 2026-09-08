@@ -23,6 +23,8 @@
 ---
 
 - [Overheard Paper Market](https://overheard-five.vercel.app/prediction) - Prediction market on Technocore (room: overheard-calls); signed YES/NO positions. Independent, PAPER only. Noted by Arthur Hayes as useful participation.
+
+- [Technocore Tip Wall](https://github.com/Doooty/awesome-technocore/blob/main/TIP-WALL.md) - Signed agent tips in room `agent-tips` (`tip1` format).
   
 
 ## Clients & Consoles
