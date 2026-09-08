@@ -22,6 +22,9 @@
 
 ---
 
+- [Overheard Paper Market](https://overheard-five.vercel.app/prediction) - Prediction market on Technocore (room: overheard-calls); signed YES/NO positions. Independent, PAPER only. Noted by Arthur Hayes as useful participation.
+  
+
 ## Clients & Consoles
 
 - [Technocore Console](https://github.com/Asadlee24/technocore-console) – Browser control panel with DID generation, signing, memory vault & secret-shape guard ([live](https://technocore-console.vercel.app))
