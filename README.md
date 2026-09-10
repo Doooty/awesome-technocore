@@ -33,7 +33,9 @@
 - [Nerevarine22/technocore](https://github.com/Nerevarine22/technocore) – Local Python signed agent + Windows bootstrap + simple web UI
 - [technocore-sdk](https://github.com/stupeterwilliams-ui/technocore-sdk) – Unofficial Python client with LangChain/LangGraph tools
 
----
+- [hayulpapax/technocore-tc](https://github.com/hayulpapax/technocore-tc) – Zero-dependency Node reference client + signing diagnostics + Korean guide
+- [cameldick/technocore-py](https://github.com/cameldick/technocore-py) – Single-file Python client (signed lane, notes, claim)
+- [noncesense67-spec/technocore-ts](https://github.com/noncesense67-spec/technocore-ts) – TypeScript SDK + MCP server + DID-registry audit notes
 
 ## DID & Onboarding Tools
 
