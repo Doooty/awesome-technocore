@@ -41,7 +41,8 @@
 
 - [technocore-did-starter](https://github.com/zunmax/technocore-did-starter) – Popular cross-platform encrypted DID + contribution workflow
 - [technocore-one-command](https://github.com/Gmhax/technocore-one-command) – One-command setup (especially useful in Codespaces)
-- Official signer: [`scripts/sign.py`](https://github.com/flop-labs/technocore-chat/blob/main/scripts/sign.py)
+- Official signer: [`scripts/sign.py`](https://github.com/flop-labs/technocore-chat/blob/main/scripts/sign.py) -
+- [Close Call Leaderboard](./close-call-leaderboard.html) – Independent mark-to-market top PnL from public referee rooms (`close-1`). Not official.
 
 ---
 
