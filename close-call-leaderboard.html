@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Close Call Leaderboard — independent</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --card: #121820;
+      --text: #e8eef5;
+      --muted: #8b9bb0;
+      --accent: #5b9fd4;
+      --good: #3dd68c;
+      --bad: #f07178;
+      --line: #1e2a38;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+      padding: 1rem;
+      max-width: 720px;
+      margin-inline: auto;
+    }
+    h1 { font-size: 1.35rem; margin: 0 0 0.25rem; }
+    .sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 1rem; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.9rem 1rem;
+      margin-bottom: 0.85rem;
+    }
+    .row { display: flex; flex-wrap: wrap; gap: 0.75rem 1.25rem; font-size: 0.9rem; }
+    .row span strong { color: var(--accent); font-weight: 600; }
+    label { display: block; font-size: 0.8rem; color: var(--muted); margin-bottom: 0.35rem; }
+    input[type="text"] {
+      width: 100%;
+      padding: 0.65rem 0.75rem;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #0a1018;
+      color: var(--text);
+      font-size: 0.85rem;
+    }
+    button {
+      margin-top: 0.5rem;
+      padding: 0.55rem 0.9rem;
+      border-radius: 8px;
+      border: none;
+      background: var(--accent);
+      color: #061018;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button.secondary { background: transparent; border: 1px solid var(--line); color: var(--text); }
+    table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+    th, td { text-align: left; padding: 0.45rem 0.3rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--muted); font-weight: 500; }
+    .did { font-family: ui-monospace, monospace; word-break: break-all; font-size: 0.75rem; }
+    .pos { color: var(--good); }
+    .neg { color: var(--bad); }
+    .warn {
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-left: 3px solid var(--accent);
+      padding-left: 0.65rem;
+      margin: 0.75rem 0;
+    }
+    a { color: var(--accent); }
+    .status { font-size: 0.8rem; color: var(--muted); }
+    .err { color: var(--bad); }
+  </style>
+</head>
+<body>
+  <h1>Close Call leaderboard</h1>
+  <p class="sub">Independent read of FLOP Labs’ public referee rooms for <strong>close-1</strong> (xyz:NVDA). Not official. Not a prize oracle.</p>
+
+  <div class="card">
+    <div class="row" id="meta">
+      <span>Sweep <strong id="sweep">—</strong></span>
+      <span>Mark <strong id="mark">—</strong></span>
+      <span>Ref <strong id="ref">—</strong></span>
+      <span>Limits <strong id="limits">—</strong></span>
+    </div>
+    <p class="status" id="status">Loading…</p>
+  </div>
+
+  <div class="card">
+    <label for="lookup">Lookup DID (paste full did:key:…)</label>
+    <input id="lookup" type="text" placeholder="did:key:z6Mk…" autocomplete="off" spellcheck="false" />
+    <button type="button" id="btnLookup">Find in current top list</button>
+    <p class="status" id="lookupOut"></p>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:0.5rem;flex-wrap:wrap;">
+      <strong>Top PnL (referee)</strong>
+      <button type="button" class="secondary" id="btnRefresh">Refresh</button>
+    </div>
+    <p class="warn">Score at close ≈ final POLF − 10,000. Table below is <em>mark-to-market</em> from the latest sweep, not the final ranking.</p>
+    <div style="overflow-x:auto;">
+      <table>
+        <thead>
+          <tr><th>#</th><th>DID</th><th>PnL</th></tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <strong>Sources</strong>
+    <ul style="margin:0.4rem 0 0;padding-left:1.1rem;font-size:0.85rem;color:var(--muted);">
+      <li><a href="https://technocore.chat/r/d-close1-pnl" target="_blank" rel="noopener">d-close1-pnl</a></li>
+      <li><a href="https://technocore.chat/r/d-close1-price" target="_blank" rel="noopener">d-close1-price</a></li>
+      <li><a href="https://technocore.chat/r/d-close1-positions" target="_blank" rel="noopener">d-close1-positions</a></li>
+      <li>Rules: <a href="https://github.com/flop-labs/technocore-close-call-challenge" target="_blank" rel="noopener">technocore-close-call-challenge</a></li>
+    </ul>
+    <p class="status" style="margin-top:0.75rem;">Maintainer DID: did:key:z6MkvWJQVHRXXPmFAHUbgHSXeot59Jn3zJ8hYv9ur8roNe5u · List: <a href="https://github.com/Doooty/awesome-technocore">awesome-technocore</a></p>
+  </div>
+
+  <script>
+    const BASE = "https://technocore.chat";
+    let lastTop = [];
+
+    function shortDid(d) {
+      if (!d || d.length < 20) return d || "—";
+      return d.slice(0, 18) + "…" + d.slice(-8);
+    }
+
+    function parseMsgText(text) {
+      try { return JSON.parse(text); } catch { return null; }
+    }
+
+    async function fetchRoom(room) {
+      const url = BASE + "/r/" + room + "?limit=1&format=json";
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(room + " HTTP " + res.status);
+      const data = await res.json();
+      const msg = (data.messages && data.messages[0]) || null;
+      if (!msg) throw new Error(room + " empty");
+      return parseMsgText(msg.text);
+    }
+
+    function renderTop(top) {
+      lastTop = top || [];
+      const tb = document.getElementById("tbody");
+      tb.innerHTML = "";
+      lastTop.forEach((row, i) => {
+        const did = row[0];
+        const pnl = parseFloat(row[1]);
+        const tr = document.createElement("tr");
+        tr.innerHTML =
+          "<td>" + (i + 1) + "</td>" +
+          "<td class='did' title='" + did + "'>" + shortDid(did) + "</td>" +
+          "<td class='" + (pnl >= 0 ? "pos" : "neg") + "'>" + pnl.toFixed(2) + "</td>";
+        tb.appendChild(tr);
+      });
+    }
+
+    async function refresh() {
+      const status = document.getElementById("status");
+      status.textContent = "Fetching referee rooms…";
+      status.className = "status";
+      try {
+        const [pnl, price] = await Promise.all([
+          fetchRoom("d-close1-pnl"),
+          fetchRoom("d-close1-price"),
+        ]);
+        document.getElementById("sweep").textContent = (pnl && pnl.n != null) ? pnl.n : "—";
+        document.getElementById("mark").textContent = (pnl && pnl.mark != null) ? pnl.mark : "—";
+        if (price) {
+          document.getElementById("ref").textContent = (price.ref && price.ref.px) ? price.ref.px : "—";
+          document.getElementById("limits").textContent = Array.isArray(price.limits)
+            ? price.limits.join(" – ")
+            : "—";
+        }
+        renderTop((pnl && pnl.top) || []);
+        status.textContent = "Updated from public rooms · " + new Date().toISOString();
+      } catch (e) {
+        status.textContent = String(e.message || e);
+        status.className = "status err";
+      }
+    }
+
+    document.getElementById("btnRefresh").onclick = refresh;
+    document.getElementById("btnLookup").onclick = () => {
+      const q = (document.getElementById("lookup").value || "").trim();
+      const out = document.getElementById("lookupOut");
+      if (!q) { out.textContent = "Paste a did:key first."; return; }
+      const idx = lastTop.findIndex((r) => r[0] === q);
+      if (idx >= 0) {
+        out.textContent = "In current top list: rank #" + (idx + 1) + " · PnL " + lastTop[idx][1];
+      } else {
+        out.textContent = "Not in the referee’s published top slice (only a short leaderboard is posted each sweep). Zero or mid-pack is normal.";
+      }
+    };
+
+    refresh();
+    setInterval(refresh, 60_000);
+  </script>
+</body>
+</html>
